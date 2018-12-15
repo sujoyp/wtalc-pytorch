@@ -1,4 +1,4 @@
-# Active Learning on Data with Contextual Relationships
+# W-TALC: Weakly-supervised Temporal Activity Localization and Classification
 
 ## Overview
 This package is a PyTorch implementation of the paper [W-TALC: Weakly-supervised Temporal Activity Localization and Classification](http://openaccess.thecvf.com/content_ECCV_2018/papers/Sujoy_Paul_W-TALC_Weakly-supervised_Temporal_ECCV_2018_paper.pdf), by [Sujoy Paul](www.ee.ucr.edu/~supaul/
