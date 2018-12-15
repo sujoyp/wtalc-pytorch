@@ -1,4 +1,4 @@
-# Active Learning on Data with Contextual Relationships
+# W-TALC: Weakly-supervised Temporal Activity Localization and Classification
 
 ## Overview
 This package is a PyTorch implementation of the paper [W-TALC: Weakly-supervised Temporal Activity Localization and Classification](http://openaccess.thecvf.com/content_ECCV_2018/papers/Sujoy_Paul_W-TALC_Weakly-supervised_Temporal_ECCV_2018_paper.pdf), by [Sujoy Paul](www.ee.ucr.edu/~supaul/
@@ -14,7 +14,7 @@ This package uses or depends on the the following packages:
 The Kinetics pre-trained I3D features for Thumos14 dataset can be downloaded [here](https://emailucr-my.sharepoint.com/:f:/g/personal/sujoy_paul_email_ucr_edu/Es1zbHQY4PxKhUkdgvWHtU0BK-_yugaSjXK84kWsB0XD0w?e=I836Fl). The annotations are included with this package. 
 
 ## Running
-This code can be run using two diferent datasets - Thumos14 and Thumos14reduced. The later dataset contain only the data points which has temporal boundaries. The dataset name (with other parameters can be changed in options.py). The file to be executed is main.py. The results can be viewed using tensorboard logger or the text file named .log.
+This code can be run using two diferent datasets - Thumos14 and Thumos14reduced. The later dataset contain only the data points which has temporal boundaries. The dataset name (with other parameters can be changed in options.py). The file to be executed is main.py. The results can be viewed using tensorboard logger or the text file named .log generated during executio.
 
 ## Citation
 Please cite the following work if you use this package.
