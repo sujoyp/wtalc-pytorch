@@ -2,7 +2,7 @@
 
 ## Overview
 This package is a PyTorch implementation of the paper [W-TALC: Weakly-supervised Temporal Activity Localization and Classification](http://openaccess.thecvf.com/content_ECCV_2018/papers/Sujoy_Paul_W-TALC_Weakly-supervised_Temporal_ECCV_2018_paper.pdf), by [Sujoy Paul](www.ee.ucr.edu/~supaul/
-), Sourya Roy and [Amit K Roy-Chowdhury](http://www.ee.ucr.edu/~amitrc/) and published at [ECCV 2018](https://eccv2018.org/). The TensorFlow implementation will be coming up soon.
+), Sourya Roy and [Amit K Roy-Chowdhury](http://www.ee.ucr.edu/~amitrc/) and published at [ECCV 2018](https://eccv2018.org/). The TensorFlow implementation can be found [here](https://github.com/sujoyp/wtalc-tensorflow).
 
 ## Dependencies
 This package uses or depends on the the following packages:
