@@ -9,7 +9,7 @@ def str2ind(categoryname,classlist):
 
 def smooth(v):
    return v
-   #l = min(3, len(v)); l = l - (1-l%2)
+   #l = min(351, len(v)); l = l - (1-l%2)
    #if len(v) <= 3:
    #   return v
    #return savgol_filter(v, l, 1) #savgol_filter(v, l, 1) #0.5*(np.concatenate([v[1:],v[-1:]],axis=0) + v)
