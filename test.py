@@ -37,7 +37,7 @@ def test(itr, dataset, args, model, logger, device):
     instance_logits_stack = np.array(instance_logits_stack)
     labels_stack = np.array(labels_stack)
 
-    dmap, iou = dmAP(element_logits_stack, dataset.path_to_annotations)
+    dmap, iou = dmAP(element_logits_stack, dataset.path_to_annotations, args)
     
     if args.dataset_name == 'Thumos14':
         test_set = sio.loadmat('test_set_meta.mat')['test_videos'][0]

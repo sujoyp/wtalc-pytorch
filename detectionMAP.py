@@ -14,13 +14,13 @@ def smooth(v):
    #   return v
    #return savgol_filter(v, l, 1) #savgol_filter(v, l, 1) #0.5*(np.concatenate([v[1:],v[-1:]],axis=0) + v)
 
-def filter_segments(segment_predict, videonames, ambilist):
+def filter_segments(segment_predict, videonames, ambilist, factor):
    ind = np.zeros(np.shape(segment_predict)[0])
    for i in range(np.shape(segment_predict)[0]):
       vn = videonames[int(segment_predict[i,0])]
       for a in ambilist:
          if a[0]==vn:
-            gt = range(int(round(float(a[2])*25/16)), int(round(float(a[3])*25/16)))
+            gt = range(int(round(float(a[2])*factor)), int(round(float(a[3])*factor)))
             pd = range(int(segment_predict[i][1]),int(segment_predict[i][2]))
             IoU = float(len(set(gt).intersection(set(pd))))/float(len(set(gt).union(set(pd))))
             if IoU > 0:
@@ -28,7 +28,7 @@ def filter_segments(segment_predict, videonames, ambilist):
    s = [segment_predict[i,:] for i in range(np.shape(segment_predict)[0]) if ind[i]==0]
    return np.array(s)
 
-def getLocMAP(predictions, th, annotation_path):
+def getLocMAP(predictions, th, annotation_path, args):
 
    gtsegments = np.load(annotation_path + '/segments.npy')
    gtlabels = np.load(annotation_path + '/labels.npy')
@@ -38,6 +38,10 @@ def getLocMAP(predictions, th, annotation_path):
    classlist = np.load(annotation_path + '/classlist.npy'); classlist = np.array([c.decode('utf-8') for c in classlist])
    duration = np.load(annotation_path + '/duration.npy')
    ambilist = annotation_path + '/Ambiguous_test.txt'
+   if args.feature_type == 'UNT':
+      factor = 10.0/4.0
+   else:
+      factor = 25.0/16.0
 
    ambilist = list(open(ambilist,'r'))
    ambilist = [a.strip('\n').split(' ') for a in ambilist]
@@ -108,7 +112,7 @@ def getLocMAP(predictions, th, annotation_path):
       # Get list of all predictions for class c
       for i in range(len(predictions)):
          tmp = smooth(predictions[i][:,c])
-         threshold = np.max(tmp) - (np.max(tmp) - np.min(tmp))*0.5
+         threshold = np.max(tmp) - (np.max(tmp) - np.min(tmp))*0.65
          vid_pred = np.concatenate([np.zeros(1),(tmp>threshold).astype('float32'),np.zeros(1)], axis=0)
          vid_pred_diff = [vid_pred[idt]-vid_pred[idt-1] for idt in range(1,len(vid_pred))]
          s = [idk for idk,item in enumerate(vid_pred_diff) if item==1]
@@ -119,7 +123,7 @@ def getLocMAP(predictions, th, annotation_path):
                segment_predict.append([i,s[j],e[j],np.max(tmp[s[j]:e[j]])+0.7*c_score[i][c]])
                detection_results[i].append([classlist[c], s[j], e[j], np.max(tmp[s[j]:e[j]])+0.7*c_score[i][c]])
       segment_predict = np.array(segment_predict)
-      segment_predict = filter_segments(segment_predict, videoname, ambilist)
+      segment_predict = filter_segments(segment_predict, videoname, ambilist, factor)
    
       # Sort the list of predictions for class c based on score
       if len(segment_predict) == 0:
@@ -136,7 +140,7 @@ def getLocMAP(predictions, th, annotation_path):
          flag = 0.
          for j in range(len(segment_gt)):
             if segment_predict[i][0]==segment_gt[j][0]:
-               gt = range(int(round(segment_gt[j][1]*25/16)), int(round(segment_gt[j][2]*25/16)))
+               gt = range(int(round(segment_gt[j][1]*factor)), int(round(segment_gt[j][2]*factor)))
                p = range(int(segment_predict[i][1]),int(segment_predict[i][2]))
                IoU = float(len(set(gt).intersection(set(p))))/float(len(set(gt).union(set(p))))
                if IoU >= th:
@@ -156,12 +160,12 @@ def getLocMAP(predictions, th, annotation_path):
    return 100*np.mean(ap)
   
 
-def getDetectionMAP(predictions, annotation_path):
+def getDetectionMAP(predictions, annotation_path, args):
    iou_list = [0.1, 0.2, 0.3, 0.4, 0.5]
    dmap_list = []
    for iou in iou_list:
       print('Testing for IoU %f' %iou)
-      dmap_list.append(getLocMAP(predictions, iou, annotation_path))
+      dmap_list.append(getLocMAP(predictions, iou, annotation_path, args))
 
    return dmap_list, iou_list
 
