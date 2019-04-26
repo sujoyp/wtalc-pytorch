@@ -17,7 +17,7 @@ The features for Thumos14 and ActivityNet1.2 dataset can be downloaded [here](ht
 This code can be run using two diferent datasets - Thumos14 and Thumos14reduced. The later dataset contain only the data points which has temporal boundaries of Thumos14. There are two options of features only for Thumos14reduced. The dataset name (with other parameters can be changed in options.py). The file to be executed is main.py. The results can be viewed using tensorboard logger or the text file named .log generated during execution. The options for I3D features are the ones mentioned in options.py. For UNT features, the options to be used are as follows:
 
 ```javascript 
-python main.py --max-seqlen 1200 --lr 0.00001
+python main.py --max-seqlen 1200 --lr 0.00001 --feature-type UNT
 ```
 
 ## Citation
