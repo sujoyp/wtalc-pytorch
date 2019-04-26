@@ -11,7 +11,7 @@ This package uses or depends on the the following packages:
 3. numpy, scipy among others
 
 ## Data
-The for Thumos14 and ActivityNet1.2 dataset can be downloaded [here](https://emailucr-my.sharepoint.com/:f:/g/personal/sujoy_paul_email_ucr_edu/Es1zbHQY4PxKhUkdgvWHtU0BK-_yugaSjXK84kWsB0XD0w?e=I836Fl). The annotations are included with this package. 
+The features for Thumos14 and ActivityNet1.2 dataset can be downloaded [here](https://emailucr-my.sharepoint.com/:f:/g/personal/sujoy_paul_email_ucr_edu/Es1zbHQY4PxKhUkdgvWHtU0BK-_yugaSjXK84kWsB0XD0w?e=I836Fl). The annotations are included with this package. 
 
 ## Running
 This code can be run using two diferent datasets - Thumos14 and Thumos14reduced. The later dataset contain only the data points which has temporal boundaries of Thumos14. There are two options of features only for Thumos14reduced. The dataset name (with other parameters can be changed in options.py). The file to be executed is main.py. The results can be viewed using tensorboard logger or the text file named .log generated during execution. The options for I3D features are the ones mentioned in options.py. For UNT features, the options to be used are as follows:
